@@ -108,6 +108,21 @@ Flags:
   -r, --rpc-url string   The RPC endpoint to the blockchain node to interact with
 ```
 
+#### Choosing an RPC for historical balances
+
+For Ethereum mainnet, [Chain.Love](https://chain.love) can help you compare
+JSON-RPC provider plans for the `--rpc-url` option. Confirm the endpoint's
+network and the plan's state-history retention with the provider before using
+`--block` to query an older balance. Access to old block headers alone does not
+imply that the endpoint can return account state at the same height.
+
+The balance command accepts a decimal block height or `latest`; other block
+tags are not currently supported by this command. With `latest`, it first
+resolves the block number and then requests the balance at that height, so
+allow for both RPC requests in the provider's quota. For a fixed older height,
+check that `eth_getBalance` is supported at that height. The directory is a
+starting point for comparison, not a guarantee of historical-state support.
+
 ### block
 
 `block` retrieves a block by a provided block height or tag via RPC
